@@ -1,16 +1,24 @@
+function getApplication(application_name) {
+	try {
+		return Application(application_name);
+	} catch (e) {
+		return null;
+	}
+}
+
 let output = "";
-if (Application("Music").running()) {
-    const track = Application("Music").currentTrack;
-    const artist = track.artist();
-    const title = track.name();
+
+let app = getApplication("Music");
+if (app && app.running()) {
+    const track = app.track;
+    const artist = track.artist;
+    const title = track.name;
     output = `${title} - ${artist}`.substr(0, 50);
-} else if (Application("iTunes").running()) {
-    const track = Application("iTunes").currentTrack;
-    const artist = track.artist();
-    const title = track.name();
-    output = `${title} - ${artist}`.substr(0, 50);
-} else if (Application("Spotify").running()) {
-    const track = Application("Spotify").currentTrack;
+}
+
+app = getApplication("Spotify");
+if (app && app.running()) {
+    const track = app.currentTrack;
     const artist = track.artist();
     const title = track.name();
     output = `${title} - ${artist}`.substr(0, 50);
