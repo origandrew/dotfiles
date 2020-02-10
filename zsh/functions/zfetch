@@ -17,19 +17,21 @@ git_clone_error_msg() {
   echo -e "  ${Red}[ERROR]${Rst} git clone errored: ${Red}${1}${Rst}. ${Yel}aborting...${Rst}"
 }
 
+typeset -Ag fetched_plugins
+
 # Simplest dependency fetcher known to mankind
 if [[ $1 == "update" ]]; then
-  for name in ${(@k)plugins}; do
+  for name in ${(@k)fetched_plugins}; do
     local cwd=$(pwd)
-    local dest=$plugins[$name]
+    local dest=$fetched_plugins[$name]
     cd $dest
     echo -e "Updating ${Yel}${name}${Rst}..."
     git pull --quiet --recurse-submodules
     cd $cwd
   done
 elif [[ $1 == "ls" ]]; then
-  for name in ${(@k)plugins}; do
-    echo -e "${name}: ${Yel}$plugins[$name]${Rst}"
+  for name in ${(@k)fetched_plugins}; do
+    echo -e "${name}: ${Yel}$fetched_plugins[$name]${Rst}"
   done
 else
   # where the repo is going
@@ -45,7 +47,7 @@ else
   fi
 
   local cwd=$(pwd)
-  plugins[$name]=$dest
+  fetched_plugins[$name]=$dest
 
   if [[ ! -d $dest ]]; then
     local url=https://github.com/$name
@@ -72,9 +74,9 @@ else
       echo -e "  Checked out master"
     fi
   fi
-  plugin="$dest/${dest##*/}.plugin.zsh"
-  if [ -f "$plugin" ]; then
-    source "$plugin"
+  fetched_plugin="$dest/${dest##*/}.plugin.zsh"
+  if [ -f "$fetched_plugin" ]; then
+    source "$fetched_plugin"
   fi
   cd $cwd
 fi

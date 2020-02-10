@@ -4,10 +4,6 @@ command_exists() {
     type "$1" > /dev/null 2>&1
 }
 
-echo "Installing dotfiles."
-
-source install/link.sh
-
 source install/git.sh
 
 # only perform macOS-specific install
@@ -21,6 +17,11 @@ if [ "$(uname)" == "Darwin" ]; then
 
     # install brew dependencies from Brewfile
     brew bundle
+
+    # setup jenv
+    jenv enable-plugin maven
+    jenv enable-plugin export
+    jenv add $(/usr/libexec/java_home)
 
     # After the install, setup fzf
     echo -e "\\n\\nRunning fzf install script..."
@@ -58,16 +59,18 @@ elif ! [[ $SHELL =~ .*zsh.* ]]; then
     chsh -s "$(command -v zsh)"
 fi
 
-# Change the default shell to zsh
-zsh_path="$( command -v zsh )"
-if ! grep "$zsh_path" /etc/shells; then
-    echo "adding $zsh_path to /etc/shells"
-    echo "$zsh_path" | sudo tee -a /etc/shells
+# Setup Oh My Zsh
+if ! [[ -d "$ZSH" ]]; then
+    ZSH="$HOME/.dotfiles/oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-if [[ "$SHELL" != "$zsh_path" ]]; then
-    chsh -s "$zsh_path"
-    echo "default shell changed to $zsh_path"
+if [ -f ~/.zshrc ] || [ -h ~/.zshrc ]; then
+    rm ~/.zshrc
 fi
+
+echo "Installing dotfiles."
+
+source install/link.sh
 
 echo "Done. Reload your terminal."

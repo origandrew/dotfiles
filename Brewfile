@@ -43,5 +43,8 @@ brew "yarn"
 brew "youtube-dl"
 brew "z"
 brew "zsh"
+brew "jenv"
 
 cask "kitty"
+cask "java"
+cask "java11"
