@@ -25,6 +25,15 @@ prepend_path $DOTFILES/bin
 prepend_path $HOME/bin
 prepend_path /usr/local/opt/grep/libexec/gnubin
 prepend_path /usr/local/sbin
+prepend_path $HOME/go/bin
+prepend_path $HOME/.jenv/bin
+prepend_path $HOME/flutter/bin
+
+# init jenv
+eval "$(jenv init -)"
+
+export GO111MODULE=on
+export GOPRIVATE="github.com/origandrew"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -94,9 +103,20 @@ zfetch $ZPLUGDIR chriskempson/base16-shell
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode tmux)
+plugins=(
+    git
+    gitignore
+    vi-mode
+    tmux
+    zsh_reload
+    docker
+    docker-compose
+)
 
 source $ZSH/oh-my-zsh.sh
+
+# Enable OpenShift CLI autocompletion
+source <(oc completion zsh)
 
 # User configuration
 
@@ -142,6 +162,9 @@ export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# add git credentials to environment for docker usage
+export DOCKER_GIT_CREDENTIALS=$(cat ~/.git-credentials)
 
 # alias git to hub
 if type hub > /dev/null 2>&1; then
@@ -226,5 +249,3 @@ alias tat='tmux attach -t'
 alias tns='tmux new-session -s'
 # fnm
 eval "$(fnm env --multi)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

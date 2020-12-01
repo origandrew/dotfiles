@@ -18,10 +18,13 @@ if [ "$(uname)" == "Darwin" ]; then
     # install brew dependencies from Brewfile
     brew bundle
 
+    go get -u github.com/mdempsky/gocode
+
     # setup jenv
     jenv enable-plugin maven
     jenv enable-plugin export
-    jenv add $(/usr/libexec/java_home)
+    # add all jdk to jenv for easy switching
+    /usr/libexec/java_home --xml | awk '/JVMHomePath/{getline; print}' | awk -F '[<>]' '{for(i=3;i<=NF;i+=3){print $i}}' | xargs -n1 jenv add
 
     # After the install, setup fzf
     echo -e "\\n\\nRunning fzf install script..."

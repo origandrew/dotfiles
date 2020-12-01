@@ -371,8 +371,8 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     " Close buffers but keep splits
-    Plug 'moll/vim-bbye'
-    nmap <leader>b :Bdelete<cr>
+    " Plug 'moll/vim-bbye'
+    " nmap <leader>b :Bdelete<cr>
 
     " Writing in vim {{{{
         Plug 'junegunn/goyo.vim'
@@ -448,7 +448,7 @@ call plug#begin('~/.config/nvim/plugged')
 
         nmap <silent> <leader>s :GFiles?<cr>
 
-        nmap <silent> <leader>r :Buffers<cr>
+        nmap <silent> <leader>b :Buffers<cr>
         nmap <silent> <leader>e :FZF<cr>
         nmap <leader><tab> <plug>(fzf-maps-n)
         xmap <leader><tab> <plug>(fzf-maps-x)
@@ -507,6 +507,7 @@ call plug#begin('~/.config/nvim/plugged')
 
         let g:coc_global_extensions = [
         \ 'coc-css',
+        \ 'coc-flutter',
         \ 'coc-json',
         \ 'coc-tsserver',
         \ 'coc-git',
@@ -518,7 +519,8 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-emmet',
         \ 'coc-prettier',
         \ 'coc-ultisnips',
-        \ 'coc-explorer'
+        \ 'coc-explorer',
+        \ 'coc-gocode'
         \ ]
 
         autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -641,7 +643,36 @@ call plug#begin('~/.config/nvim/plugged')
         let g:vim_json_syntax_conceal = 0
     " }}}
 
+    " Golang {{{
+        Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+        " use golang language server
+        let g:go_def_mode='gopls'
+        let g:go_info_mode='gopls'
+        " Highlight more info
+        let g:go_highlight_build_constraints = 1
+        let g:go_highlight_extra_types = 1
+        let g:go_highlight_fields = 1
+        let g:go_highlight_functions = 1
+        let g:go_highlight_methods = 1
+        let g:go_highlight_operators = 1
+        let g:go_highlight_structs = 1
+        let g:go_highlight_types = 1
+        " highlight same variable in view
+        let g:go_auto_sameids = 1
+        " show type info in statusbar
+        let g:go_auto_type_info = 1
+        " disable gd mapping of vim-go
+        let g:go_def_mapping_enabled = 1
+    " }}}
+
+    " dart {{{
+        Plug 'dart-lang/dart-vim-plugin'
+    " }}}
+
+    " docker {{{
     Plug 'ekalinin/Dockerfile.vim'
+    " }}}
 " }}}
 
 call plug#end()
