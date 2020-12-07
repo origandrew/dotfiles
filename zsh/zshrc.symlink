@@ -118,6 +118,12 @@ source $ZSH/oh-my-zsh.sh
 # Enable OpenShift CLI autocompletion
 source <(oc completion zsh)
 
+# Enable Python virtual env
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=$HOME/.venv
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -249,3 +255,9 @@ alias tat='tmux attach -t'
 alias tns='tmux new-session -s'
 # fnm
 eval "$(fnm env --multi)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
