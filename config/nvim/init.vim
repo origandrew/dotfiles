@@ -125,9 +125,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
-        Plug 'nicknisi/vim-base16-lightline'
+        " Plug 'nicknisi/vim-base16-lightline'
         let g:lightline = {
-            \   'colorscheme': 'base16',
+            \   'colorscheme': 'wombat',
             \   'active': {
             \       'left': [ [ 'mode', 'paste' ],
             \               [ 'gitbranch' ],
@@ -148,7 +148,7 @@ call plug#begin('~/.config/nvim/plugged')
             \       'filename': 'helpers#lightline#fileName',
             \       'fileformat': 'helpers#lightline#fileFormat',
             \       'filetype': 'helpers#lightline#fileType',
-            \       'gitbranch': 'helpers#lightline#gitBranch',
+            \       'gitbranch': '',
             \       'cocstatus': 'coc#status',
             \       'currentfunction': 'helpers#lightline#currentFunction',
             \       'gitblame': 'helpers#lightline#gitBlame'
