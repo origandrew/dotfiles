@@ -123,47 +123,53 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'chriskempson/base16-vim'
     Plug 'joshdick/onedark.vim'
 
+    " Airline
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+
     " LightLine {{{
-        Plug 'itchyny/lightline.vim'
+        " Plug 'itchyny/lightline.vim'
         " Plug 'nicknisi/vim-base16-lightline'
-        let g:lightline = {
-            \   'colorscheme': 'wombat',
-            \   'active': {
-            \       'left': [ [ 'mode', 'paste' ],
-            \               [ 'gitbranch' ],
-            \               [ 'readonly', 'filetype', 'filename' ]],
-            \       'right': [ [ 'percent' ], [ 'lineinfo' ],
-            \               [ 'fileformat', 'fileencoding' ],
-            \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
-            \   },
-            \   'component_expand': {
-            \   },
-            \   'component_type': {
-            \       'readonly': 'error',
-            \       'linter_warnings': 'warning',
-            \       'linter_errors': 'error'
-            \   },
-            \   'component_function': {
-            \       'fileencoding': 'helpers#lightline#fileEncoding',
-            \       'filename': 'helpers#lightline#fileName',
-            \       'fileformat': 'helpers#lightline#fileFormat',
-            \       'filetype': 'helpers#lightline#fileType',
-            \       'gitbranch': '',
-            \       'cocstatus': 'coc#status',
-            \       'currentfunction': 'helpers#lightline#currentFunction',
-            \       'gitblame': 'helpers#lightline#gitBlame'
-            \   },
-            \   'tabline': {
-            \       'left': [ [ 'tabs' ] ],
-            \       'right': [ [ 'close' ] ]
-            \   },
-            \   'tab': {
-            \       'active': [ 'filename', 'modified' ],
-            \       'inactive': [ 'filename', 'modified' ],
-            \   },
-            \   'separator': { 'left': '', 'right': '' },
-            \   'subseparator': { 'left': '', 'right': '' }
-        \ }
+        " let g:lightline = {
+        "     \   'colorscheme': 'wombat',
+        "     \   'active': {
+        "     \       'left': [ [ 'mode', 'paste' ],
+        "     \               [ 'gitbranch' ],
+        "     \               [ 'readonly', 'filetype', 'filename' ]],
+        "     \       'right': [ [ 'percent' ], [ 'lineinfo' ],
+        "     \               [ 'fileformat', 'fileencoding' ],
+        "     \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
+        "     \   },
+        "     \   'component_expand': {
+        "     \   },
+        "     \   'component_type': {
+        "     \       'readonly': 'error',
+        "     \       'linter_warnings': 'warning',
+        "     \       'linter_errors': 'error'
+        "     \   },
+        "     \   'component_function': {
+        "     \       'fileencoding': 'helpers#lightline#fileEncoding',
+        "     \       'filename': 'helpers#lightline#fileName',
+        "     \       'fileformat': 'helpers#lightline#fileFormat',
+        "     \       'filetype': 'helpers#lightline#fileType',
+        "     \       'gitbranch': 'helpers#lightline#gitBranch',
+        "     \       'cocstatus': 'coc#status',
+        "     \       'currentfunction': 'helpers#lightline#currentFunction',
+        "     \       'gitblame': 'helpers#lightline#gitBlame'
+        "     \   },
+        "     \   'tabline': {
+        "     \       'left': [ [ 'tabs' ] ],
+        "     \       'right': [ [ 'close' ] ]
+        "     \   },
+        "     \   'tab': {
+        "     \       'active': [ 'filename', 'modified' ],
+        "     \       'inactive': [ 'filename', 'modified' ],
+        "     \   },
+        "     \   'separator': { 'left': '', 'right': '' },
+        "     \   'subseparator': { 'left': '', 'right': '' }
+        " \ }
     " }}}
 " }}}
 
@@ -493,6 +499,7 @@ call plug#begin('~/.config/nvim/plugged')
 
         Plug 'tpope/vim-rhubarb' " hub extension for fugitive
         Plug 'sodapopcan/vim-twiggy'
+        Plug 'rbong/vim-flog'
     " }}}
 
     " UltiSnips {{{

@@ -14,6 +14,14 @@
 # then uncomment the following line to make Meta + arrow keys mapping work
 # set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
 
+# synchronize all panes in a window
+bind y setw synchronize-panes
+
+# window switch and swap controls left/right
+bind-key -n C-S-Left swap-window -t -1\; select-window -t -1
+bind-key -n C-S-Right swap-window -t +1\; select-window -t +1
+bind-key -n M-S-Left select-window -t -1
+bind-key -n M-S-Right select-window -t +1
 
 # -- windows & pane creation ---------------------------------------------------
 
@@ -330,7 +338,7 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -346,6 +354,12 @@ bind C-q send-prefix
 unbind C-a
 unbind o # this is the default key for cycling panes
 bind ^A select-pane -t:.+
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
 
 # move status line to top
 #set -g status-position top
@@ -376,6 +390,7 @@ tmux_conf_update_plugins_on_reload=true
 # visit https://github.com/tmux-plugins for available plugins
 #set -g @plugin 'tmux-plugins/tmux-copycat'
 #set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin "tmux-plugins/tmux-sensible"
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
